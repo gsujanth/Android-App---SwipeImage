@@ -64,14 +64,14 @@ public class SearchPhotosActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position==images.size()-1){
-                    Toast.makeText(SearchPhotosActivity.this, "No more Images",Toast.LENGTH_SHORT).show();
+                if (position == images.size() - 1) {
+                    Toast.makeText(SearchPhotosActivity.this, "No more Images", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(SearchPhotosActivity.this, "Image "+(position+1), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchPhotosActivity.this, "Image " + (position + 1), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -94,8 +94,8 @@ public class SearchPhotosActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.new_clear:
                 searchPhotosET.setText("");
-                images.clear();
-                if (imagesPagerAdapter != null) {
+                if (images != null && !images.isEmpty()) {
+                    images.clear();
                     imagesPagerAdapter.notifyDataSetChanged();
                     viewPager.setAdapter(imagesPagerAdapter);
                 } else {
