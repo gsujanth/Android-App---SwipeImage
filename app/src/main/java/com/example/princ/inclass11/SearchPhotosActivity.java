@@ -37,7 +37,7 @@ public class SearchPhotosActivity extends AppCompatActivity{
 
     EditText searchPhotosET;
     Button searchButton;
-    ViewPager viewPager;
+    ViewPager viewPager;//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
