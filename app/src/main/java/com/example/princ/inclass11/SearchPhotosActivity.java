@@ -28,11 +28,11 @@ import okhttp3.Response;
           Mounika Yendluri
 */
 
-public class SearchPhotosActivity extends AppCompatActivity{
+public class SearchPhotosActivity extends AppCompatActivity {
 
     OkHttpClient client = new OkHttpClient();
-    private final String TAG="demoSP";
-    ArrayList<SearchImagesResponse.Hit> images=new ArrayList<>();
+    private final String TAG = "demoSP";
+    ArrayList<SearchImagesResponse.Hit> images = new ArrayList<>();
     ImagesPagerAdapter imagesPagerAdapter;
 
     EditText searchPhotosET;
@@ -44,17 +44,17 @@ public class SearchPhotosActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_photos);
 
-        searchPhotosET=findViewById(R.id.searchPhotosET);
-        searchButton=findViewById(R.id.searchButton);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        searchPhotosET = findViewById(R.id.searchPhotosET);
+        searchButton = findViewById(R.id.searchButton);
+        viewPager = findViewById(R.id.viewPager);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String keyword=searchPhotosET.getText().toString();
-                if(!keyword.isEmpty()){
+                String keyword = searchPhotosET.getText().toString();
+                if (!keyword.isEmpty()) {
                     searchImages(keyword);
-                }else{
+                } else {
                     Toast.makeText(SearchPhotosActivity.this, "No keyword entered", Toast.LENGTH_SHORT).show();
                 }
 
@@ -76,10 +76,10 @@ public class SearchPhotosActivity extends AppCompatActivity{
             case R.id.new_clear:
                 searchPhotosET.setText("");
                 images.clear();
-                if(imagesPagerAdapter!=null) {
+                if (imagesPagerAdapter != null) {
                     imagesPagerAdapter.notifyDataSetChanged();
                     viewPager.setAdapter(imagesPagerAdapter);
-                }else{
+                } else {
                     Toast.makeText(this, "No Images to clear", Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -90,7 +90,7 @@ public class SearchPhotosActivity extends AppCompatActivity{
 
     public void searchImages(String keyword) {
         Request request = new Request.Builder()
-                .url("https://pixabay.com/api/?key=8642355-be17b0bc866caca641ac1cd44&q="+keyword+"&image_type=photo").build();
+                .url("https://pixabay.com/api/?key=8642355-be17b0bc866caca641ac1cd44&q=" + keyword + "&image_type=photo").build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -102,7 +102,7 @@ public class SearchPhotosActivity extends AppCompatActivity{
             public void onResponse(Call call, Response response) throws IOException {
                 String str = response.body().string();
                 Log.d(TAG, "searchImagesOnResponse: ");
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     final SearchImagesResponse searchImagesResponse = gson.fromJson(str, SearchImagesResponse.class);
                     images = searchImagesResponse.hits;
@@ -110,12 +110,12 @@ public class SearchPhotosActivity extends AppCompatActivity{
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(SearchPhotosActivity.this, images.size()+" images loaded", Toast.LENGTH_SHORT).show();
-                            imagesPagerAdapter = new ImagesPagerAdapter(getSupportFragmentManager(), images);
+                            Toast.makeText(SearchPhotosActivity.this, images.size() + " images loaded", Toast.LENGTH_SHORT).show();
+                            imagesPagerAdapter = new ImagesPagerAdapter(getSupportFragmentManager(), images, SearchPhotosActivity.this);
                             viewPager.setAdapter(imagesPagerAdapter);
                         }
                     });
-                }else{
+                } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

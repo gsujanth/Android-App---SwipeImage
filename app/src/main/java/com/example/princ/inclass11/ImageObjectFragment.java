@@ -29,6 +29,8 @@ public class ImageObjectFragment extends Fragment {
         imageView = rootView.findViewById(R.id.imageView);
         if(args!=null) {
             Picasso.get().load(args.getString(ARG_OBJECT)).into(imageView);
+            int pos=args.getInt("position");
+            Toast.makeText(rootView.getContext(), "Image "+pos, Toast.LENGTH_SHORT).show();
         }
         return rootView;
     }
