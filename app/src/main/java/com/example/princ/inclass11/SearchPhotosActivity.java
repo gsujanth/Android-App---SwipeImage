@@ -61,6 +61,25 @@ public class SearchPhotosActivity extends AppCompatActivity {
             }
         });
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if(position==images.size()-1){
+                    Toast.makeText(SearchPhotosActivity.this, "No more Images",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Toast.makeText(SearchPhotosActivity.this, "Image "+(position+1), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 
     @Override
