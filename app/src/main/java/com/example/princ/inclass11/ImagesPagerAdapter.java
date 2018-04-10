@@ -2,13 +2,9 @@ package com.example.princ.inclass11;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
