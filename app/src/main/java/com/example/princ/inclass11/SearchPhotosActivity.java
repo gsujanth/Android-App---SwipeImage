@@ -23,9 +23,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/*Assignment# - InClass11
-  Names : Sujanth Babu Guntupalli
-          Mounika Yendluri
+/*
+  Author : Sujanth Babu Guntupalli
 */
 
 public class SearchPhotosActivity extends AppCompatActivity {
